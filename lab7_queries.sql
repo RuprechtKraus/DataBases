@@ -48,11 +48,11 @@ FROM computer_science_marks;
    Оформить в виде процедуры, на входе идентификатор группы. */
 DROP PROCEDURE IF EXISTS get_debtor_students;
 
-CREATE PROCEDURE get_debtor_students(IN id_group INT)
+CREATE PROCEDURE get_debtor_students(IN id_group_of_debtor INT)
 BEGIN
     SELECT DISTINCT s.name AS student, s2.name AS subject
     FROM student s
-             INNER JOIN `group` g ON g.id_group = s.id_group AND g.id_group = id_group
+             INNER JOIN `group` g ON g.id_group = s.id_group AND g.id_group = id_group_of_debtor
              INNER JOIN lesson l ON l.id_group = g.id_group
              INNER JOIN subject s2 ON s2.id_subject = l.id_subject
              LEFT JOIN mark m ON m.id_student = s.id_student AND m.id_lesson = l.id_lesson
